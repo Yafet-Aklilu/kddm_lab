@@ -1,0 +1,49 @@
+erDiagram
+    customers ||--|{ orders : places
+    orders ||--o{ order_items : contains
+    products ||--|{ order_items : "appears in"
+    sellers ||--|{ order_items : sells
+
+    customers {
+        string customer_id PK
+        string customer_unique_id
+        string customer_zip_code_prefix
+        string customer_city
+        string customer_state
+    }
+    orders {
+        string order_id PK
+        string customer_id FK
+        string order_status
+        timestamp order_purchase_timestamp
+        timestamp order_approved_at
+        timestamp order_delivered_carrier_date
+        timestamp order_delivered_customer_date
+        timestamp order_estimated_delivery_date
+    }
+    order_items {
+        string order_id PK, FK
+        int order_item_id PK
+        string product_id FK
+        string seller_id FK
+        timestamp shipping_limit_date
+        double price
+        double freight_value
+    }
+    products {
+        string product_id PK
+        string product_category_name
+        int product_name_lenght
+        int product_description_lenght
+        int product_photos_qty
+        int product_weight_g
+        int product_length_cm
+        int product_height_cm
+        int product_width_cm
+    }
+    sellers {
+        string seller_id PK
+        string seller_zip_code_prefix
+        string seller_city
+        string seller_state
+    }
